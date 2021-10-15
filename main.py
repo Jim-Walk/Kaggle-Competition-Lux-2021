@@ -1,8 +1,7 @@
 from typing import Dict
-import sys
 from agent import agent
 if __name__ == "__main__":
-    
+
     def read_input():
         """
         Reads input from stdin
@@ -12,6 +11,7 @@ if __name__ == "__main__":
         except EOFError as eof:
             raise SystemExit(eof)
     step = 0
+
     class Observation(Dict[str, any]):
         def __init__(self, player=0) -> None:
             self.player = player
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     while True:
         inputs = read_input()
         observation["updates"].append(inputs)
-        
+
         if step == 0:
             player_id = int(observation["updates"][0])
             observation.player = player_id

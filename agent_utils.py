@@ -1,6 +1,7 @@
-from lux.game_objects import Position, Unit
+from lux.game_objects import Position, Unit, City
 from lux.constants import Constants
 from lux.game_map import GameMap
+from sys import stderr
 
 
 def can_move(width, height, agent: Unit, direction) -> bool:
@@ -47,6 +48,20 @@ def nearest_resource(pos: Position,
     for cell in specific_resources[1:]:
         if pos.distance_to(cell.pos) < pos.distance_to(nearest):
             nearest = cell.pos
+
+    return nearest
+
+
+def nearest_citytile(pos: Position, cities: dict[str, City]) -> Position:
+    nearest = None
+
+    for city in cities.values():
+        for citytile in city.citytiles:
+            print(citytile.pos, file=stderr)
+            if nearest is None:
+                nearest = citytile.pos
+            elif pos.distance_to(citytile.pos) < pos.distance_to(nearest):
+                nearest = citytile.pos
 
     return nearest
 
