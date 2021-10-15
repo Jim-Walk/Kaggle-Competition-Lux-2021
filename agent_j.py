@@ -6,7 +6,7 @@ from lux.game import Game
 # from lux.game_map import Cell
 from lux.constants import Constants
 from agent_utils import nearest_resource, find_resources, can_move
-import Random
+import random
 
 # we declare this global game_state object so that state persists across turns
 # so we do not need to reinitialize it all the time
@@ -35,6 +35,7 @@ def agent(observation, configuration):
 
     resources = find_resources(game_state.map)
     print(resources)
+    unit_action = None
 
     for unit in player.units:
         if unit.get_cargo_space_left() == 0:
@@ -46,24 +47,28 @@ def agent(observation, configuration):
                                              ))
             else:
                 direction_home = unit.pos.direction_to(tile_pos)
-                actions.append(player.units[0].move(direction_home))
+                print('I am broken')
+                actions.append(unit.move(direction_home))
         else:
             nearest = nearest_resource(unit.pos,
                                        Constants.RESOURCE_TYPES.WOOD,
                                        resources)
             direct = unit.pos.direction_to(nearest)
             if unit.can_act() and can_move(width, height, unit, direct):
-                actions.append(player.units[0].move(direct))
+                actions.append(unit.move(direct))
 
     for city in player.cities:
         for citytile in city.CityTile:
+            city_tile_action = None
             if citytile.can_act():
                 action = random.randint(0,2)
                 if action == 0:
-                    city.research()
+                    city_tile_action = city_tile.research()
                 if action == 1:
-                    city.build_worker()
+                    city_tile_action = city_tile.build_worker()
                 if action == 2:
-                    city.build_cart()
+                    city_tile_action = city_tile.build_cart()
+
+            actions.append(city_tile_action)
 
     return actions
