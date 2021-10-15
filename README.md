@@ -13,6 +13,7 @@ Entry for the [Lux AI 2021 Kaggle Competition](https://www.kaggle.com/c/lux-ai-2
 ## Rewards
 
 `w()`: weight increasing as game continues
+
 `d()`: distance
 
 |Shit                    | Bad  |Fine   |Good   |Optimal   |
