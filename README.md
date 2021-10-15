@@ -28,4 +28,4 @@ Entry for the [Lux AI 2021 Kaggle Competition](https://www.kaggle.com/c/lux-ai-2
 
 - Time until night
 - For every Worker, number of adjacent tiles with collectable resources
-- Where do workers which have planned to move
+- Which squares can a worker move to without collision
